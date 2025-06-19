@@ -26,7 +26,6 @@ class ItemController extends Controller
         return view('items.create', compact('brands'));
     }
 
-    // ✅ Handle storing new item (FIXED)
     public function store(Request $request)
 {
     $validated = $request->validate([
@@ -46,7 +45,7 @@ class ItemController extends Controller
 
     // Create and load relationships
     $item = Item::create($validated);
-    $item->load('brand', 'model'); // ✅ FIX: Load model relationship immediately
+    $item->load('brand', 'model'); 
 
     // Send email
     Mail::to('umairadd@gmail.com')->send(new NewItemAdded($item));
